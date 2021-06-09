@@ -1,4 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState, useEffect} from 'react';
+import Pagination from './components/Pagination';
 import Posts from './components/Posts';
 import axios from 'axios';
 import './App.css';
@@ -25,19 +27,14 @@ const App = () => {
     const indexOfFirstPost = indexOfLastPost - postPerPage;
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-
-    const columns = [
-      { field: 'posts', headerName: 'Posts', width: 270 }
-    ];
-  
-    const rows = [
-      {posts: currentPosts}
-    ];
+    //Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber)
 
   return (
     <div className="container mt-5">
       <h1 className='text-primary mb-3'>My Blog</h1>
       <Posts posts={currentPosts} loading={loading}/>
+      <Pagination postsPerPage={postPerPage} totalPosts={posts.length} paginate={paginate}/>
     </div>
 
   );
